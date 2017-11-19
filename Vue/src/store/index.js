@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  description: [],
+  description: {},
   count: 0
 }
 
@@ -20,13 +20,13 @@ const mutations = {
     state.count++
   },
   saveData (state, data) {
+    state.description = data
     console.log('data in the store youhou', data)
   }
 }
 
 const actions = {
   increment (context) {
-    // console.log('increment', context)
     context.commit('increment')
   },
   callApi (context, data) {

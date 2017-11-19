@@ -2,13 +2,14 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <button @click="whenIClick">count</button>
+    {{ testYOlo() }}
   </div>
 </template>
 
 <script>
-// import store from '@/store'
-// import { mapActions, mapGetters } from 'vuex'
-import axios from 'axios'
+import { fetchExample } from '@/actions/example'
+import exampleSelector from '@/selector/example'
+import store from '@/store'
 
 export default {
   name: 'HelloWorld',
@@ -18,21 +19,12 @@ export default {
     }
   },
   beforeMount () {
-    const options = {
-      url: 'https://jsonplaceholder.typicode.com/posts/1',
-      method: 'GET',
-      data: {}
-    }
-
-    axios(options)
-    .then((response) => {
-      console.log('data', response)
-      return this.$store.dispatch('callApi', response)
-    })
-
-    // this.$store.dispatch('increment')
+    fetchExample()
   },
   methods: {
+    testYOlo () {
+      return exampleSelector(store.state.description)
+    },
     whenIClick () {
       this.$store.dispatch('increment')
     }
